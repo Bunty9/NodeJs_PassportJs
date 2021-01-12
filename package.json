@@ -1,0 +1,26 @@
+{
+  "name": "nodejs_passportjs",
+  "version": "1.0.0",
+  "description": "passport.js login method",
+  "author": "Bunty9 <cbipin2000@gmail.com>",
+  "keywords": [
+    "nodejs passportjs login authentication"
+  ],
+  "license": "GPL v3.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bunty9/NodeJs_PassportJs.git"
+  },
+  "scripts": {
+    "start": "./bin/app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-errors": "^1.8.0",
+    "pino": "^6.10.0",
+    "pino-http": "^5.3.0",
+    "pino-pretty": "^4.3.0"
+  }
+}
