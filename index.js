@@ -6,6 +6,8 @@ const routes = require('./routes');
 const mongoConnect = require('./databaseAuth/mongoConnect');
 const flash = require('express-flash')
 const session = require('express-session')
+const passport = require('passport')
+const methodOverride = require('method-override')
 
 // Create the express app
 const app = express()
@@ -25,7 +27,10 @@ app.use(session({
   resave:false,
   saveUninitialized:false
 }))
-// Error handlers
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(methodOverride('_method'))
+
 
 app.use('/api',routes);
 
