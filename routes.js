@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 const User = require('./models/user_model')
 const initializePassport = require('./passport-config')
+
 initializePassport(
   passport,
   email => User.find(user => user.email === email),
@@ -10,17 +11,23 @@ initializePassport(
 )
 
 router.route('/').get( (req, res)=>{
-    res.render('index.ejs')
+  res.render('index.ejs')
 });
 
-router.route('/').post( (req, res)=>{
+router.route('/login').get( (req, res)=>{
     res.render('login.ejs')
 });
 
-router.route('/register').get( (req, res)=>{
+router.route('/login').post( checkNotAuthenticated, passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true
+}))
+
+router.route('/register').get(checkNotAuthenticated, (req, res)=>{
     res.render('register.ejs')
 });
-router.route('/register').post(async (req, res)=>{
+router.route('/register').post(checkNotAuthenticated, async (req, res)=>{
     
     // hash the passwords
     const salt = await bcrypt.genSalt(10);
