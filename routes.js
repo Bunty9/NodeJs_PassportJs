@@ -1,3 +1,16 @@
+// GNU GENERAL PUBLIC LICENSE
+// Version 3, 29 June 2007
+
+// Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+// Everyone is permitted to copy and distribute verbatim copies
+// of this license document, but changing it is not allowed.
+
+//      Preamble
+
+// The GNU General Public License is a free, copyleft license for
+// software and other kinds of works.
+
+
 const router = require('express').Router();
 const bcrypt = require('bcrypt')
 const passport = require('passport')
@@ -53,15 +66,15 @@ router.route('/logout').delete( (req, res) => {
   res.redirect('/api/login')
 })
 
+// check if the user is authenticated if not redirect to login , this to block unauthenticated users from accessing the home page
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
       return next()
     }
-  
     res.redirect('/api/login')
-  }
-  
-  function checkNotAuthenticated(req, res, next) {
+}
+// if the user is authenticated redirect to home page if the login/register page is accessed again
+function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
       return res.redirect('/api')
     }
